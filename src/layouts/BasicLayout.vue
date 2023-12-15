@@ -8,7 +8,10 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://gitee.com/dashboard/projects" target="_blank">
+        <a
+          href="https://github.com/Detail-analy/eggOj-frontend"
+          target="_blank"
+        >
           鸡蛋OJ判题系统 by 刘渠好</a
         >
       </a-layout-footer>
@@ -21,13 +24,13 @@
 }
 
 #basicLayout .header {
-  margin-bottom: 16px;
   box-shadow: #eee 1px 1px 5px;
 }
 
 #basicLayout .content {
   background: linear-gradient(to right, #bbb, #fff);
   margin-bottom: 16px;
+  padding: 20px;
 }
 
 #basicLayout .footer {
