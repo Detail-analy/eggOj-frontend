@@ -3,6 +3,9 @@ import HomeView from "@/views/HomeView.vue";
 import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import accessEnum from "@/access/accessEnum";
+import UserLoginView from "@/views/user/UserLoginView";
+import UserRegisterView from "@/views/user/UserRegisterView";
+import UserLayout from "@/layouts/UserLayout";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -39,5 +42,22 @@ export const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+  {
+    path: "/user",
+    name: "用户",
+    component: UserLayout,
+    children: [
+      {
+        path: "/user/login",
+        name: "用户登录",
+        component: UserLoginView,
+      },
+      {
+        path: "/user/register",
+        name: "用户注册",
+        component: UserRegisterView,
+      },
+    ],
   },
 ];
