@@ -1,6 +1,6 @@
 <template>
   <div id="userLayout">
-    <a-layout style="height: 400px">
+    <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
         <a-space>
           <img src="../assets/oj-egg.svg" class="logo" />
@@ -11,10 +11,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a
-          href="https://github.com/Detail-analy/eggOj-frontend"
-          target="_blank"
-        >
+        <a href="https://github.com/Detail-analy/eggOj-backend" target="_blank">
           鸡蛋Oj判题系统 by 刘渠好</a
         >
       </a-layout-footer>
@@ -26,17 +23,17 @@
 #userLayout {
 }
 
+#userLayout {
+  text-align: center;
+  background: url("https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png")
+    0% 0% / 100% 100%;
+}
+
 #userLayout .header {
   margin-top: 16px;
 }
 
-#userLayout {
-  text-align: center;
-  background: url("https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png")
-    100% 100% / 100% 100%;
-}
-
-#userLayout.logo {
+#userLayout .logo {
   width: 64px;
   height: 64px;
 }
@@ -48,7 +45,7 @@
 
 #userLayout .footer {
   padding: 16px;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
