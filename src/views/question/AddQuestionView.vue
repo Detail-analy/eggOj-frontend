@@ -98,7 +98,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
 import { QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
@@ -108,11 +108,11 @@ const route = useRoute();
 // 如果页面地址包含 update，视为更新页面
 const updatePage = route.path.includes("update");
 
-let form = ref({
-  title: "",
-  tags: [],
-  answer: "",
-  content: "",
+const form = ref({
+  title: " ",
+  tags: [""],
+  answer: " ",
+  content: " ",
   judgeConfig: {
     memoryLimit: 1000,
     stackLimit: 1000,
@@ -120,11 +120,116 @@ let form = ref({
   },
   judgeCase: [
     {
-      input: "",
-      output: "",
+      input: "   ",
+      output: "   ",
     },
   ],
 });
+
+/**
+ * 根据id获取旧的信息
+ */
+const doSubmit = async () => {
+  if (updatePage) {
+    const res = await QuestionControllerService.updateQuestionUsingPost(
+      form.value
+    );
+    if (res.code == 0) {
+      message.success("更新成功");
+    } else {
+      message.error("更新失败" + res.message);
+    }
+  } else {
+    const res = await QuestionControllerService.addQuestionUsingPost(
+      form.value
+    );
+    if (res.code === 0) {
+      message.success("创建成功");
+    } else {
+      message.error("创建失败" + res.message);
+    }
+  }
+};
+
+onMounted(() => {
+  loadData();
+});
+
+const loadData = async () => {
+  const id = route.query.id;
+  if (!id) {
+    return;
+  }
+  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+    id as any
+  );
+  if (res.code === 0) {
+    form.value = res.data as any;
+    // json 转 js 对象
+    if (!form.value.judgeCase) {
+      form.value.judgeCase = [
+        {
+          input: "",
+          output: "",
+        },
+      ];
+    } else {
+      form.value.judgeCase = JSON.parse(form.value.judgeCase as any);
+    }
+    if (!form.value.judgeConfig) {
+      form.value.judgeConfig = {
+        memoryLimit: 1000,
+        stackLimit: 1000,
+        timeLimit: 1000,
+      };
+    } else {
+      form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
+    }
+    if (!form.value.tags) {
+      form.value.tags = [];
+    } else {
+      form.value.tags = JSON.parse(form.value.tags as any);
+    }
+  } else {
+    message.error("加载失败，" + res.message);
+  }
+};
+/**
+ * 新增题目用例
+ */
+const handleAdd = () => {
+  if (form.value.judgeCase) {
+    form.value.judgeCase.push({
+      input: "",
+      output: "",
+    });
+  }
+};
+
+/**
+ * 删除题目用例
+ * @param index
+ */
+const handleDelete = (index: number) => {
+  //如果存在才可以删除
+  if (form.value.judgeCase) {
+    form.value.judgeCase.splice(index, 1);
+  }
+};
+
+/**
+ * 修改内容
+ */
+const onContentChange = (value: string) => {
+  form.value.content = value;
+};
+
+/**
+ * 修改答案
+ */
+const onAnswerChange = (value: string) => {
+  form.value.answer = value;
+};
 </script>
 
 <style scoped>

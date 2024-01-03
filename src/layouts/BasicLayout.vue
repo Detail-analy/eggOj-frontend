@@ -34,12 +34,23 @@
 }
 
 #basicLayout .footer {
-  background: #efefef;
-  padding: 16px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  /*background: #efefef;*/
+  /*padding: 16px;*/
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*text-align: center;*/
+  margin: 48px 0 24px;
+  margin-top: 48px;
+  margin-right: 0px;
+  margin-bottom: 24px;
+  margin-left: 0px;
+  padding: 0 16px;
+  padding-top: 0px;
+  padding-right: 16px;
+  padding-bottom: 0px;
+  padding-left: 16px;
   text-align: center;
 }
 </style>
