@@ -1,5 +1,5 @@
 <template>
-  <div id="manageQuestionView">
+  <div id="questionsView">
     <a-table
       :ref="tableRef"
       :columns="columns"
@@ -38,7 +38,7 @@ const tableRef = ref();
 const dataList = ref([]);
 const total = ref(0);
 const searchParams = ref({
-  pageSize: 10,
+  pageSize: 8,
   current: 1,
 });
 
@@ -151,6 +151,6 @@ const doUpdate = (question: Question) => {
 </script>
 
 <style scoped>
-#manageQuestionView {
+#questionsView {
 }
 </style>

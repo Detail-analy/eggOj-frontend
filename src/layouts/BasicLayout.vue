@@ -12,7 +12,7 @@
           href="https://github.com/Detail-analy/eggOj-frontend"
           target="_blank"
         >
-          鸡蛋OJ判题系统 by 刘渠好</a
+          鸡蛋OJ判题系统 by 程序员小刘</a
         >
       </a-layout-footer>
     </a-layout>
